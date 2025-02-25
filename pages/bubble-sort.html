@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Selection Sort</title>
+
+    <!-- Include highlight.js CSS for styling the code -->
+    <link id="highlight-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+
+    <!-- Include highlight.js library for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <link rel="stylesheet" href="../styles.css">
+
+    
+</head>
+<body>
+    <!-- Dark Mode Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
+
+    <!-- Go to Top Button -->
+    <button class="go-to-top" onclick="scrollToTop()">↑ Go to Top</button>
+
+    <header>
+        <h1>Welcome to DSA Help!</h1>
+        <p>Your go-to place for Data Structures and Algorithms.</p>
+        <a href="../index.html" class="back-to-home">← Back to Home</a> <!-- Back to Home link -->
+    </header>
+
+    <main>
+        <!-- Code section for Selection Sort -->
+        <section class="code-section">
+            <h2>Selection Sort Algorithm (C++)</h2>
+            <button class="copy-btn" onclick="copyCode()">Copy Code</button>
+            <pre>
+<code id="code" class="cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    // Taking Inputs
+    int n;
+    cin &gt;&gt; n;
+
+    int arr[n];
+    for(int i = 0; i &lt; n; i++) {
+        cin &gt;&gt; arr[i];
+    }
+
+    // Selection Sort Algorithm
+    for(int i = 0; i &lt; n - 1; i++) {
+        int minIndex = i;
+
+        for(int j = i + 1; j &lt; n; j++) {
+            if(arr[j] &lt; arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        int temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+    }
+
+    // Output the sorted array
+    for(int i = 0; i &lt; n; i++) {
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+    }
+
+    cout &lt;&lt; "\n";
+
+    return 0;
+}
+</code>
+            </pre>
+        </section>
+
+        <!-- GIF Section -->
+        <section class="gif-section">
+            <img src="../assets/images & gifs/bubble-640.gif" alt="selection_sort" class="selection-sort-gif">
+        </section>
+
+        <!-- Vlog Section -->
+        <section class="vlog-section">
+            <div class="vlog-text">
+                <p>Selection Sort is a simple sorting algorithm that works by repeatedly finding the smallest (or largest) element from the unsorted portion of the array and swapping it with the leftmost unsorted element. This process divides the array into two parts: one that is sorted and the other that remains unsorted. The algorithm continues this process until the entire array is sorted. Although easy to understand and implement, Selection Sort is not the most efficient for large datasets due to its time complexity of O(n²), which makes it slower as the number of elements increases. It performs well with small arrays but becomes impractical when dealing with larger ones.</p>
+                <p>One of the advantages of Selection Sort is that it is an in-place sorting algorithm, meaning it doesn’t require additional memory beyond the array being sorted, giving it a space complexity of O(1). Despite its inefficiency in terms of time complexity, Selection Sort can still be useful in certain situations, particularly when memory usage is a concern or when working with small datasets where the quadratic time complexity doesn’t significantly impact performance. However, for larger datasets, more efficient algorithms like Quick Sort or Merge Sort, which have time complexities of O(n log n), are typically preferred.</p>
+            </div>
+        </section>
+
+        <!-- Vlog Image Section -->
+        <section class="vlog-img-wrapper">
+            <img src="../assets/images & gifs/bubble-sort-new.jpg" alt="pic_explaining_all_steps_of_the_sort" class="vlog-img">
+        </section>
+    </main>
+
+    <footer>
+        <p> Created by Rumman Karim.</p>
+    </footer>
+
+    <!-- Copy notification -->
+    <div id="copyNotification" class="copy-notification">Code copied.</div>
+
+    <script>
+        // Initialize highlight.js for syntax highlighting
+        hljs.highlightAll();
+
+        // Function to copy the code to clipboard
+        function copyCode() {
+            const codeElement = document.getElementById('code');
+            const range = document.createRange();
+            range.selectNode(codeElement);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            try {
+                document.execCommand('copy');
+                showNotification();
+            } catch (err) {
+                alert('Unable to copy code');
+            }
+            window.getSelection().removeAllRanges();
+        }
+
+        // Function to show the notification
+        function showNotification() {
+            const notification = document.getElementById('copyNotification');
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.opacity = 1;
+            }, 10);
+            setTimeout(() => {
+                notification.style.opacity = 0;
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 300);
+            }, 2000);
+        }
+
+        // Function to toggle dark mode
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                // Switch to a light theme for highlight.js
+                document.getElementById('highlight-theme').setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                // Switch to a dark theme for highlight.js
+                document.getElementById('highlight-theme').setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css');
+            }
+        }
+
+        // Set initial theme based on user preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.setAttribute('data-theme', 'dark');
+            document.getElementById('highlight-theme').setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css');
+        } else {
+            document.body.setAttribute('data-theme', 'light');
+            document.getElementById('highlight-theme').setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css');
+        }
+
+        // Function to scroll to the top of the page
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/hide the "Go to Top" button based on scroll position
+        window.onscroll = function() {
+            const goToTopButton = document.querySelector('.go-to-top');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                goToTopButton.style.display = 'block';
+            } else {
+                goToTopButton.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>
