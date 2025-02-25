@@ -174,7 +174,7 @@ footer {
 /* Back to Home Link */
 .back-to-home {
     display: inline-block;
-    margin-top: 5px;
+    margin-top: 9px;
     padding: 8px 16px; /* Add padding */
     background-color: var(--button-bg-color); /* Use the same button color */
     color: var(--button-text-color); /* Use the same button text color */
@@ -366,4 +366,18 @@ header p {
 .blog-links li::marker {
     color: var(--header-bg-color); /* Match the header green color */
     font-size: 1.2rem; /* Adjust bullet size if needed */
+}
+
+/* Vlog Image Section */
+.vlog-img-wrapper {
+    margin: 20px 0;
+    text-align: center; /* Center the image horizontally */
+}
+
+.vlog-img-wrapper img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block; /* Ensure the image behaves as a block element */
+    margin: 0 auto; /* Center the image horizontally */
 }
