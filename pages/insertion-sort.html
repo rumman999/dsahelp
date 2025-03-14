@@ -5,16 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Insertion Sort</title>
-
-    <!-- Include highlight.js CSS for styling the code -->
     <link id="highlight-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
-
-    <!-- Include highlight.js library for syntax highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-
     <link rel="stylesheet" href="../styles.css">
-
-    
 </head>
 <body>
     <!-- Dark Mode Toggle Button -->
@@ -30,63 +23,23 @@
     </header>
 
     <main>
-        <!-- Code section for Selection Sort -->
+        <!-- Code section for Insertion Sort -->
         <section class="code-section">
             <h2>Insertion Sort Algorithm (C++)</h2>
             <button class="copy-btn" onclick="copyCode()">Copy Code</button>
-            <pre>
-<code id="code" class="cpp">#include &lt;iostream&gt;
-    using namespace std;
-    
-    // Insertion Sort Algorithm for an Integer array
-    
-    int main() {
-        // Taking Inputs
-        int n;
-        cin &gt;&gt; n;
-    
-        int arr[n];
-        for(int i = 0; i &lt; n; i++) {
-            cin &gt;&gt; arr[i];
-        }
-    
-        // Insertion Sort Algorithm
-        for(int i = 1; i &lt; n; i++) {
-            int key = arr[i];
-            int j = i - 1;
-    
-            while(j &gt;= 0 && arr[j] &gt; key) {
-                arr[j + 1] = arr[j];
-                j--;
-            }
-    
-            arr[j + 1] = key;
-        }
-    
-        // Output the sorted array
-        for(int i = 0; i &lt; n; i++) {
-            cout &lt;&lt; arr[i] &lt;&lt; " ";
-        }
-    
-        // Print newline after the output
-        cout &lt;&lt; "\n";
-    
-        return 0;
-    }    
-</code>
-            </pre>
+            <pre><code id="code" class="cpp"></code></pre>
         </section>
 
         <!-- GIF Section -->
         <section class="gif-section">
-            <img src="../assets/images & gifs/insertion-600.gif" alt="selection_sort" class="selection-sort-gif">
+            <img src="../assets/images & gifs/insertion-600.gif" alt="insertion_sort" class="insertion-sort-gif">
         </section>
 
         <!-- Vlog Section -->
         <section class="vlog-section">
             <div class="vlog-text">
                 <p>Insertion Sort Algorithm is another simple algorithm that takes an element of an unsorted array and puts it in the correct position of the sorted part of the array. It is usually compared with sorting playing cards in your hands. There are two group of cards: one sorted and another unsorted. We pick a card from the unsorted part and put it in correct position of the sorted part of cards.</p>
-                <p>We assume the first element of the array to be sorted. And then we take the second element and compare it with the first element, if the first element is greater, then we swap them. Then we pick the third element of the unsorted array and compare it with the first two  elements of the sorted part of the array and put it in its correct position. We repeat this until the whole array is sorted.</p>
+                <p>We assume the first element of the array to be sorted. And then we take the second element and compare it with the first element, if the first element is greater, then we swap them. Then we pick the third element of the unsorted array and compare it with the first two elements of the sorted part of the array and put it in its correct position. We repeat this until the whole array is sorted.</p>
             </div>
         </section>
 
@@ -97,7 +50,7 @@
     </main>
 
     <footer>
-        <p> Created by Rumman Karim.</p>
+        <p>Created by Rumman Karim.</p>
     </footer>
 
     <!-- Copy notification -->
@@ -179,6 +132,48 @@
                 goToTopButton.style.display = 'none';
             }
         };
+
+        // Insert the code dynamically
+        const code = `#include <iostream>
+using namespace std;
+
+// Insertion Sort Algorithm for an Integer array
+
+int main() {
+    // Taking Inputs
+    int n;
+    cin >> n;
+
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    // Insertion Sort Algorithm
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+
+        arr[j + 1] = key;
+    }
+
+    // Output the sorted array
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+
+    // Print newline after the output
+    cout << "\n";
+
+    return 0;
+}`;
+        document.getElementById('code').textContent = code;
+        hljs.highlightAll(); // Re-highlight the code after inserting it
     </script>
 </body>
 </html>

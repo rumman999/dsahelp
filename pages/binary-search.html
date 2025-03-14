@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Selection Sort</title>
+    <title>Binary Search</title>
     <link id="highlight-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <link rel="stylesheet" href="../styles.css"> <!-- Link to global styles -->
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <!-- Dark Mode Toggle Button -->
@@ -23,29 +23,32 @@
     </header>
 
     <main>
-        <!-- Code section for Selection Sort -->
+        <!-- Code section for Insertion Sort -->
         <section class="code-section">
-            <h2>Selection Sort Algorithm (C++)</h2>
+            <h2>Binary Search Algorithm (C++)</h2>
             <button class="copy-btn" onclick="copyCode()">Copy Code</button>
             <pre><code id="code" class="cpp"></code></pre>
         </section>
 
+
         <!-- GIF Section -->
         <section class="gif-section">
-            <img src="../assets/images & gifs/selection-600.gif" alt="selection_sort" class="selection-sort-gif">
+            <img src="../assets/images & gifs/binary-search.gif" alt="insertion_sort" class="insertion-sort-gif">
         </section>
 
         <!-- Vlog Section -->
         <section class="vlog-section">
             <div class="vlog-text">
-                <p>Selection Sort is a simple sorting algorithm that works by repeatedly finding the smallest element and placing it in front of the unsorted array. This divides the array into two parts: a sorted part and another unsorted part. The algorithm continues this process until the entire array is sorted.</p>
-                <p>Here, we are assuming that we want to sort the array in ascending order. So, we assume the first element of the array to be the minimum element and save it's index to a variable, then we loop through and compare that with the other elements of the array to find the actual minimum value and then change the minimun index variable to this. After the actual minimum index has been found we swap it with the first element of the array. And that's how the first element of the array has been sorted. Then we assume the second element of the array to be the second minimum value of the array and then we actually find the actual second minimum value of the array and swap it with our assumed one. If assumed one is the actual one, we swap the same single element, so nothing changes. We keep doing this till we get to the last element and everytime the smallest elment of the unsorted part is added to the front of the unsorted array or it can be said that to the end of the sorted array as well. In this manner, the whole array is sorted.</p>
+                <p>The Binary Search is a searching algorithm where the required element in searched in the array by repeatedly dividing the array into 2 halves. It requires a sorted array to perform this action.</p>
+                <p>At first, we take a sorted array, then we take the starting and ending value of the array, and find the mid value by dividing it by 2. If it's and even number, it automatically floors the decimal value so there is no problem of that. Then we compare the required value with the mid value. If it's smaller than the value at the mid position, then we start to search for the required value in the first half of the array, that is, from the start to the mid point of the array. On the other hand, if the required value is greater than the mid value, then we take the last half of the array, that is, from the mid position to the end of the array. And from this new part of the array we repeatedly do this process over and over again till we find any mid value which is equal to our required value and return the mid value's index as position. And if there exists no value that is equal to our required value in the array, then we simply just return -1.</p>
             </div>
         </section>
 
+        <br>
+
         <!-- Vlog Image Section -->
         <section class="vlog-img-wrapper">
-            <img src="../assets/images & gifs/selection-sort-new.jpg" alt="pic_explaining_all_steps_of_the_sort" class="vlog-img">
+            <img src="../assets/images & gifs/Binary_Search.png" alt="pic_explaining_all_steps_of_the_sort" class="vlog-img">
         </section>
     </main>
 
@@ -137,37 +140,35 @@
         const code = `#include <iostream>
 using namespace std;
 
-int main() {
-    // Taking Inputs
-    int n;
-    cin >> n;
+int binarySearch(int arr[], int low, int high, int key){
 
-    int arr[n];
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-    }
-
-    // Selection Sort Algorithm
-    for (int i = 0; i < n - 1; i++) {
-        int minIndex = i;
-
-        for (int j = i + 1; j < n; j++) {
-            if (arr[j] < arr[minIndex]) {
-                minIndex = j;
-            }
+    while(low<=high){
+        int mid = low + (high-low)/2;
+        if(arr[mid]==key){
+            return mid;
+        } else if(arr[mid] < key){
+            low = mid + 1;
+        } else{
+            high = mid - 1;
         }
-
-        int temp = arr[i];
-        arr[i] = arr[minIndex];
-        arr[minIndex] = temp;
     }
 
-    // Output the sorted array
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
-    }
+    return -1;
+}
 
-    cout << "\n";
+int main(){
+    int arr[] = {-6, 0, 1, 4, 10, 19};
+    int n = sizeof(arr)/sizeof(arr[0]);
+
+    int key = 10;
+
+    int i = binarySearch(arr,0,n-1,key);
+
+    if(i==-1){
+        cout << "Key Not Found" << endl;
+    } else{
+        cout << "Key Found at Index: " << i << endl;
+    }
 
     return 0;
 }`;

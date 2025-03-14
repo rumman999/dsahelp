@@ -381,3 +381,13 @@ header p {
     display: block; /* Ensure the image behaves as a block element */
     margin: 0 auto; /* Center the image horizontally */
 }
+
+
+.github-repo-link a{
+    text-shadow:.5px .5px #000000;
+    text-decoration: none
+}
+
+.github-repo-link a h2:hover {
+    text-shadow: .8px .8px #000000;
+}

@@ -34,47 +34,7 @@
         <section class="code-section">
             <h2>Bubble Sort Algorithm (C++)</h2>
             <button class="copy-btn" onclick="copyCode()">Copy Code</button>
-            <pre>
-<code id="code" class="cpp">#include &lt;iostream&gt;
-    using namespace std;
-    
-    int main() {
-        // Taking Inputs
-        int n;
-        cin &gt;&gt; n;
-    
-        int arr[n];
-        for(int i = 0; i &lt; n; i++) {
-            cin &gt;&gt; arr[i];
-        }
-    
-        // Bubble Sort Algorithm
-        for(int i = 0; i &lt; n - 1; i++) {
-            bool swapped = false;
-            for(int j = 0; j &lt; n - i - 1; j++) {
-                if(arr[j] &gt; arr[j + 1]) {
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                    
-                    swapped = true;
-                }
-            }
-            if (!swapped) break; // Optimization: Stop if already sorted
-        }
-    
-        // Output the sorted array
-        for(int i = 0; i &lt; n; i++) {
-            cout &lt;&lt; arr[i] &lt;&lt; " ";
-        }
-    
-        cout &lt;&lt; "\n";
-    
-        return 0;
-    }
-    
-</code>
-            </pre>
+            <pre><code id="code" class="cpp"></code></pre>
         </section>
 
         <!-- GIF Section -->
@@ -104,6 +64,43 @@
     <div id="copyNotification" class="copy-notification">Code copied.</div>
 
     <script>
+            const code = `#include <iostream>
+using namespace std;
+
+int main() {
+    // Taking Inputs
+    int n;
+    cin >> n;
+
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    // Bubble Sort Algorithm
+    for (int i = 0; i < n - 1; i++) {
+        bool swapped = false;
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                swapped = true;
+            }
+        }
+        if (!swapped) break; // Optimization: Stop if already sorted
+    }
+
+    // Output the sorted array
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+
+    cout << endl;
+
+    return 0;
+}`;
+    document.getElementById('code').textContent = code;
         // Initialize highlight.js for syntax highlighting
         hljs.highlightAll();
 

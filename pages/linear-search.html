@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Selection Sort</title>
+    <title>Linear Search</title>
     <link id="highlight-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <link rel="stylesheet" href="../styles.css"> <!-- Link to global styles -->
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <!-- Dark Mode Toggle Button -->
@@ -23,29 +23,33 @@
     </header>
 
     <main>
-        <!-- Code section for Selection Sort -->
+        <!-- Code section for Insertion Sort -->
         <section class="code-section">
-            <h2>Selection Sort Algorithm (C++)</h2>
+            <h2>Linear Search Algorithm (C++)</h2>
             <button class="copy-btn" onclick="copyCode()">Copy Code</button>
             <pre><code id="code" class="cpp"></code></pre>
         </section>
 
+        <br> <br>
+
         <!-- GIF Section -->
         <section class="gif-section">
-            <img src="../assets/images & gifs/selection-600.gif" alt="selection_sort" class="selection-sort-gif">
+            <img src="../assets/images & gifs/linear_search.gif" alt="insertion_sort" class="insertion-sort-gif">
         </section>
+
+        <br>
 
         <!-- Vlog Section -->
         <section class="vlog-section">
             <div class="vlog-text">
-                <p>Selection Sort is a simple sorting algorithm that works by repeatedly finding the smallest element and placing it in front of the unsorted array. This divides the array into two parts: a sorted part and another unsorted part. The algorithm continues this process until the entire array is sorted.</p>
-                <p>Here, we are assuming that we want to sort the array in ascending order. So, we assume the first element of the array to be the minimum element and save it's index to a variable, then we loop through and compare that with the other elements of the array to find the actual minimum value and then change the minimun index variable to this. After the actual minimum index has been found we swap it with the first element of the array. And that's how the first element of the array has been sorted. Then we assume the second element of the array to be the second minimum value of the array and then we actually find the actual second minimum value of the array and swap it with our assumed one. If assumed one is the actual one, we swap the same single element, so nothing changes. We keep doing this till we get to the last element and everytime the smallest elment of the unsorted part is added to the front of the unsorted array or it can be said that to the end of the sorted array as well. In this manner, the whole array is sorted.</p>
+                <p>Linear Search is the most basic searching algorithm out there. To find our desired element we just start from any one of the ends of the array, and iterate through it till we find it.</p>
+                <p>There is nothing much more too it. Just start from one end, let's say the starting Index 0, then keep iterating through the all elements from the start of the array till we find our desired element. And when we do find the required element, we just stop right there at that iternation and return the index as the position of that element in that array. But if the required element is not in the array, then we just simply return -1</p>
             </div>
         </section>
 
         <!-- Vlog Image Section -->
         <section class="vlog-img-wrapper">
-            <img src="../assets/images & gifs/selection-sort-new.jpg" alt="pic_explaining_all_steps_of_the_sort" class="vlog-img">
+            <img src="../assets/images & gifs/linear_search_stepwise.png" alt="pic_explaining_all_steps_of_the_sort" class="vlog-img">
         </section>
     </main>
 
@@ -137,37 +141,29 @@
         const code = `#include <iostream>
 using namespace std;
 
-int main() {
-    // Taking Inputs
-    int n;
-    cin >> n;
-
-    int arr[n];
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-    }
-
-    // Selection Sort Algorithm
-    for (int i = 0; i < n - 1; i++) {
-        int minIndex = i;
-
-        for (int j = i + 1; j < n; j++) {
-            if (arr[j] < arr[minIndex]) {
-                minIndex = j;
-            }
+int linearSearch(int arr[], int n, int key){
+    for(int i=0;i<n;i++){
+        if(arr[i] == key){
+            return i;
         }
-
-        int temp = arr[i];
-        arr[i] = arr[minIndex];
-        arr[minIndex] = temp;
     }
 
-    // Output the sorted array
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
-    }
+    return -1;
+}
 
-    cout << "\n";
+int main(){
+    int arr[] = {10, 14, 19, 26, 27, 31, 33, 35, 42, 44};
+    int n = sizeof(arr)/sizeof(arr[0]);
+
+    int key = 33;
+
+    int i = linearSearch(arr,n,key);
+
+    if(i==-1){
+        cout << "Key Not Found" << endl;
+    } else{
+        cout << "Key Found at Index: " << i << endl;
+    }
 
     return 0;
 }`;
