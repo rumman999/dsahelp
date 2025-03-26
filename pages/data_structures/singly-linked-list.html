@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Singly Linked List</title>
+    <link id="highlight-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <!-- Dark Mode Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
+
+    <!-- Go to Top Button -->
+    <button class="go-to-top" onclick="scrollToTop()">↑ Go to Top</button>
+
+    <header>
+        <h1>Welcome to DSA Help!</h1>
+        <p>Your go-to place for Data Structures and Algorithms.</p>
+        <a href="../../index.html" class="back-to-home">← Back to Home</a>
+    </header>
+
+    <main>
+        <!-- Code section for Singly Linked List -->
+        <section class="code-section">
+            <h2>Singly Linked List Operations (C++)</h2>
+            <button class="copy-btn" onclick="copyCode()">Copy Code</button>
+            <pre><code id="code" class="cpp"></code></pre>
+        </section>
+
+        <br>
+
+         <!-- Vlog Image Section -->
+         <section class="vlog-img-wrapper">
+            <img src="../../assets/images & gifs/singly_linked_list.png" alt="singly_linked_list_steps" class="vlog-img">
+        </section>
+
+        <br>
+        
+        <!-- Vlog Section -->
+        <section class="vlog-section">
+            <div class="vlog-text">
+                <p>A Singly Linked List is a data structure where each element (node) contains some data and a pointer to the next node in the list.</p>
+                <p>We can insert elements at the beginning, end, or any position, and we can delete from the front or end. This code demonstrates creating nodes, inserting in different positions, deleting nodes, and printing the list step-by-step.</p>
+            </div>
+        </section>
+
+       
+    </main>
+
+    <footer>
+        <p>Created by Rumman Karim.</p>
+    </footer>
+
+    <!-- Copy notification -->
+    <div id="copyNotification" class="copy-notification">Code copied.</div>
+
+    <script>
+        hljs.highlightAll();
+
+        function copyCode() {
+            const codeElement = document.getElementById('code');
+            const range = document.createRange();
+            range.selectNode(codeElement);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            try {
+                document.execCommand('copy');
+                showNotification();
+            } catch (err) {
+                alert('Unable to copy code');
+            }
+            window.getSelection().removeAllRanges();
+        }
+
+        function showNotification() {
+            const notification = document.getElementById('copyNotification');
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.opacity = 1;
+            }, 10);
+            setTimeout(() => {
+                notification.style.opacity = 0;
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 300);
+            }, 2000);
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                document.getElementById('highlight-theme').setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                document.getElementById('highlight-theme').setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css');
+            }
+        }
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.setAttribute('data-theme', 'dark');
+            document.getElementById('highlight-theme').setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css');
+        } else {
+            document.body.setAttribute('data-theme', 'light');
+            document.getElementById('highlight-theme').setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css');
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        window.onscroll = function() {
+            const goToTopButton = document.querySelector('.go-to-top');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                goToTopButton.style.display = 'block';
+            } else {
+                goToTopButton.style.display = 'none';
+            }
+        };
+
+        const code = `#include <iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node* next;
+
+    node(int value){
+        data = value;
+        next = NULL;
+    }
+};
+
+node* head = NULL;
+
+void insertFirst(int value){
+    node* newItem = new node(value);
+    newItem->next = head;
+    head = newItem;
+}
+
+void insertAny(int target, int value){
+    node* newItem = new node(value);
+    node* current = head;
+    while(current->data != target){
+        current = current->next;
+    }
+    newItem->next = current->next;
+    current->next = newItem;
+}
+
+void insertLast(int value){
+    node* newItem = new node(value);
+    node* last = head;
+    while(last->next != NULL){
+        last = last->next;
+    }
+    last->next = newItem;
+}
+
+void deleteFirst(){
+    if(head == NULL){
+        cout << "Nothing Left to delete." << endl;
+        return;
+    }
+    node* current = head;
+    head = head->next;
+    delete current;
+}
+
+void deleteLast(){
+    if(head == NULL){
+        cout << "Nothing Left to delete." << endl;
+        return;
+    }
+    node* current = head;
+    node* previous = NULL;
+    while(current->next != NULL){
+        previous = current;
+        current = current->next;
+    }
+    if(previous != NULL){
+        previous->next = NULL;
+    } else {
+        head = NULL;
+    }
+    delete current;
+}
+
+void printList(){
+    if(head == NULL){
+        cout << "Linked List is Empty." << endl;
+        return;
+    }
+    node* current = head;
+    while(current != NULL){
+        cout << current->data << " ";
+        current = current->next;
+    }
+    cout << endl;
+}
+
+int main(){
+    insertFirst(10);
+    insertFirst(5);
+    insertFirst(3);
+    insertLast(25);
+    insertAny(10,15);
+    insertAny(3,4);
+    printList();
+    deleteFirst();
+    printList();
+    deleteFirst();
+    printList();
+    deleteLast();
+    printList();
+    deleteLast();
+    printList();
+    return 0;
+}`;
+        document.getElementById('code').textContent = code;
+        hljs.highlightAll();
+    </script>
+</body>
+</html>
